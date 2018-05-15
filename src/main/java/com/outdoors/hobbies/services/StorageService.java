@@ -21,11 +21,11 @@ import org.springframework.web.multipart.MultipartFile;
 public class StorageService {
  
 	Logger log = LoggerFactory.getLogger(this.getClass().getName());
-	private static Path rootLocation = Paths.get("D:\\Projects\\OutdoorsHobbies\\src\\assets\\upload-dir");
+	private static Path rootLocation = Paths.get("C:\\dev\\Projects\\hobbies\\src\\assets\\upload-dir");
 	
 	public void store(MultipartFile file, String id) {
-		rootLocation = Paths.get("D:\\Projects\\OutdoorsHobbies\\src\\assets\\upload-dir\\" + id);
-		File tmpDir = new File("D:\\Projects\\OutdoorsHobbies\\src\\assets\\upload-dir\\" + id);
+		rootLocation = Paths.get("C:\\dev\\Projects\\hobbies-FE\\src\\assets\\upload-dir\\" + id);
+		File tmpDir = new File("C:\\dev\\Projects\\hobbies\\src\\assets\\upload-dir\\" + id);
 		
 		boolean exists = tmpDir.exists();
 		if(!exists) {
@@ -40,8 +40,8 @@ public class StorageService {
 	}
 	
 	public void storeDestinationImg(MultipartFile file, String name) {
-		rootLocation = Paths.get("D:\\Projects\\OutdoorsHobbies\\src\\assets\\upload-dir\\" + name);
-		File tmpDir = new File("D:\\Projects\\OutdoorsHobbies\\src\\assets\\upload-dir\\" + name);
+		rootLocation = Paths.get("C:\\dev\\Projects\\hobbies-FE\\src\\assets\\upload-dir\\" + name);
+		File tmpDir = new File("C:\\dev\\Projects\\hobbies-FE\\src\\assets\\upload-dir\\" + name);
 		
 		boolean exists = tmpDir.exists();
 		if(!exists) {
@@ -95,7 +95,7 @@ public class StorageService {
 	
 	public ArrayList<String> getDestinationImgs(String name) {
 		ArrayList<String> imgNames = new ArrayList<String>();
-		rootLocation = Paths.get("D:\\Projects\\OutdoorsHobbies\\src\\assets\\upload-dir\\" + name);
+		rootLocation = Paths.get("C:\\dev\\Projects\\hobbies-FE\\src\\assets\\upload-dir\\" + name);
 		File folder = new File(rootLocation.toAbsolutePath().toString());
 		File[] listOfFiles = folder.listFiles();
 		

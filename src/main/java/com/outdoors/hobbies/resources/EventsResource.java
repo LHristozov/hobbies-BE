@@ -160,7 +160,7 @@ public class EventsResource {
 		if (meetingPoint != null) {
 			eventsModel.setMeetingPoint(meetingPoint.toModel());
 		}
-		if(!participants.isEmpty()) {
+		if(participants != null && !participants.isEmpty()) {
 			ArrayList<User> userList = new ArrayList<User>();
 			for (UserResource participant : participants) {
 				userList.add(participant.toModel());
