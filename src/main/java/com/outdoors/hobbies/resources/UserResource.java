@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import com.outdoors.hobbies.models.DestinationModel;
 import com.outdoors.hobbies.models.User;
+import com.outdoors.hobbies.models.UserInfoModel;
 
 public class UserResource {
 
@@ -19,7 +20,7 @@ public class UserResource {
 	private String lastname;
 
 	private String email;
-	
+
 	private String image;
 
 	private List<EventsResource> createdEvents;
@@ -27,6 +28,8 @@ public class UserResource {
 	private List<CommentResource> comments;
 
 	private List<EventsResource> subscribedEvents;
+
+	private UserInfoModel userInfo;
 
 	// private List<Authority> authorities;
 
@@ -101,7 +104,7 @@ public class UserResource {
 	public void setSubscribedEvents(List<EventsResource> subscribedEvents) {
 		this.subscribedEvents = subscribedEvents;
 	}
-	
+
 	public String getImage() {
 		return image;
 	}
@@ -110,9 +113,17 @@ public class UserResource {
 		this.image = image;
 	}
 
+	public UserInfoModel getUserInfo() {
+		return userInfo;
+	}
+
+	public void setUserInfoResource(UserInfoModel userInfo) {
+		this.userInfo = userInfo;
+	}
+
 	public static UserResource toResource(User userModel) {
 		UserResource userResource = new UserResource();
-		if(userModel == null) {
+		if (userModel == null) {
 			return userResource;
 		}
 		userResource.setUsername(userModel.getUsername());
@@ -122,39 +133,41 @@ public class UserResource {
 		userResource.setId(userModel.getId());
 		userResource.setImage(userModel.getImage());
 		userResource.setPassword(userModel.getPassword());
+		if (userModel.getUserInfo() != null) {
+			userResource.setUserInfoResource(userModel.getUserInfo());
+		}else {
+			userResource.setUserInfoResource(new UserInfoModel());
+		}
 
-//		if (userModel.getComments() != null) {
-//			userResource.setComments(
-//					userModel.getComments().stream().map(CommentResource::toResource).collect(Collectors.toList()));
-//		}
+		// if (userModel.getComments() != null) {
+		// userResource.setComments(
+		// userModel.getComments().stream().map(CommentResource::toResource).collect(Collectors.toList()));
+		// }
 
-//		if (userModel.getCreatedEvents() != null) {
-//			userResource.setCreatedEvents(
-//					userModel.getCreatedEvents().stream().map(EventsResource::toResource).collect(Collectors.toList()));
-//		}
-//		if (userModel.getSubscribedEvents() != null) {
-//			userResource.setSubscribedEvents(userModel.getSubscribedEvents().stream().map(EventsResource::toResource)
-//					.collect(Collectors.toList()));
-//		}
-		
+		// if (userModel.getCreatedEvents() != null) {
+		// userResource.setCreatedEvents(
+		// userModel.getCreatedEvents().stream().map(EventsResource::toResource).collect(Collectors.toList()));
+		// }
+		// if (userModel.getSubscribedEvents() != null) {
+		// userResource.setSubscribedEvents(userModel.getSubscribedEvents().stream().map(EventsResource::toResource)
+		// .collect(Collectors.toList()));
+		// }
 
 		return userResource;
 	}
-	
-	
-	
+
 	public User toModel() {
 		User user = new User();
-		user.setEmail(email);;
+		user.setEmail(email);
+		;
 		user.setFirstname(firstname);
 		user.setLastname(lastname);
 		user.setPassword(password);
 		user.setUsername(username);
 		user.setId(id);
 		user.setImage(image);
-		
+		user.setUserInfo(userInfo);
 		return user;
 	}
-	
 
 }

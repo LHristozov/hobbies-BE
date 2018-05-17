@@ -45,7 +45,10 @@ public class User {
     private List<CommentModel> comments;
     
     @ManyToMany(mappedBy = "participants")
-    private List<EventsModel> subscribedEvents; 
+    private List<EventsModel> subscribedEvents;
+    
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL,  mappedBy = "user")
+   	private UserInfoModel userInfo;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -143,6 +146,14 @@ public class User {
 
 	public void setImage(String image) {
 		this.image = image;
+	}
+
+	public UserInfoModel getUserInfo() {
+		return userInfo;
+	}
+
+	public void setUserInfo(UserInfoModel userInfo) {
+		this.userInfo = userInfo;
 	}
     
 	

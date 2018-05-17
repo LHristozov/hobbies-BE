@@ -1,0 +1,29 @@
+User information:
+- trqbva da se dobavi tablica user_info, koqto sadurja informaciq za potrebitelq ( interesi, rabota, data na rajdane, mestojitelstvo)
+
+
+Home:
+- CSS
+
+Event page:
+- CSS
+
+Destinations:
+- CSS
+
+Destination Page:
+- CSS
+ 
+Chat
+- CSS
+- da se pokazva koi e v 4ata
+
+Messages:
+- CSS
+- Polucheni MSG
+
+Edit Personal Info
+
+Recommender System
+
+

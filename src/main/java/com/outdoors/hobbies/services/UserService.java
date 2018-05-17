@@ -25,6 +25,9 @@ public class UserService {
 		if (userResource == null) {
 			return;
 		}
+		if (userResource.getUserInfo().getUser() == null) {
+			userResource.getUserInfo().setUser((userRepository.findOne(userResource.getId())));
+		}
 		userRepository.save(userResource.toModel());
 	}
 
