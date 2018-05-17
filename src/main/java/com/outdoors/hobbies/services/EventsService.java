@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.outdoors.hobbies.models.CommentModel;
 import com.outdoors.hobbies.models.EventsModel;
 import com.outdoors.hobbies.models.User;
+import com.outdoors.hobbies.models.UserInfoModel;
 import com.outdoors.hobbies.repositories.DestinationRepository;
 import com.outdoors.hobbies.repositories.EventsRepository;
 import com.outdoors.hobbies.repositories.UserRepository;
@@ -43,6 +44,13 @@ public class EventsService {
 		}
 		eventsResource.setOwner(
 				UserResource.toResource(userRepository.findByUsername(eventsResource.getOwner().getUsername())));
+		
+		User user = userRepository.findByUsername(eventsResource.getOwner().getUsername());
+		eventsResource.setOwner(UserResource.toResource(user));
+		UserInfoModel uim = eventsResource.getOwner().getUserInfo();
+		uim.setUser(user);
+		eventsResource.getOwner().setUserInfoResource(uim);
+		
 		eventsResource.setDestination(DestinationResource
 				.toResource(destinationRepository.findByName(eventsResource.getDestination().getName())));
 		eventsRepository.save(eventsResource.toModel());

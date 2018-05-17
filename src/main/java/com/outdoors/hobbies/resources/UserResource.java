@@ -134,7 +134,9 @@ public class UserResource {
 		userResource.setImage(userModel.getImage());
 		userResource.setPassword(userModel.getPassword());
 		if (userModel.getUserInfo() != null) {
-			userResource.setUserInfoResource(userModel.getUserInfo());
+			UserInfoModel uim = userModel.getUserInfo();
+			uim.setUser(null);
+			userResource.setUserInfoResource(uim);
 		}else {
 			userResource.setUserInfoResource(new UserInfoModel());
 		}

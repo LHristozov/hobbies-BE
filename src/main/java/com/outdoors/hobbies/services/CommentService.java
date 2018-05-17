@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.outdoors.hobbies.models.CommentModel;
+import com.outdoors.hobbies.models.User;
+import com.outdoors.hobbies.models.UserInfoModel;
 import com.outdoors.hobbies.repositories.CommentRepository;
 import com.outdoors.hobbies.repositories.DestinationRepository;
 import com.outdoors.hobbies.repositories.EventsRepository;
@@ -15,6 +17,7 @@ import com.outdoors.hobbies.repositories.UserRepository;
 import com.outdoors.hobbies.resources.CommentResource;
 import com.outdoors.hobbies.resources.DestinationResource;
 import com.outdoors.hobbies.resources.EventsResource;
+import com.outdoors.hobbies.resources.UserInfoResource;
 import com.outdoors.hobbies.resources.UserResource;
 
 @Service
@@ -39,11 +42,15 @@ public class CommentService {
 			return;
 		}
 		commentResource.setDate(new Date());
+
 		commentResource.setDestination_id(DestinationResource
 				.toResource(destinationRepository.findByName(commentResource.getDestination_id().getName())));
+		User user = userRepository.findByUsername(commentResource.getUser_id().getUsername());
+		commentResource.setUser_id(UserResource.toResource(user));
 
-		commentResource.setUser_id(
-				UserResource.toResource(userRepository.findByUsername(commentResource.getUser_id().getUsername())));
+		UserInfoModel uim = commentResource.getUser_id().getUserInfo();
+		uim.setUser(user);
+		commentResource.getUser_id().setUserInfoResource(uim);
 		commentRepository.save(commentResource.toModel());
 	}
 
@@ -54,8 +61,12 @@ public class CommentService {
 		commentResource.setDate(new Date());
 		commentResource.setEvent_id(
 				EventsResource.toResource(eventsRepository.findByName(commentResource.getEvent_id().getName())));
-		commentResource.setUser_id(
-				UserResource.toResource(userRepository.findByUsername(commentResource.getUser_id().getUsername())));
+		User user = userRepository.findByUsername(commentResource.getUser_id().getUsername());
+		commentResource.setUser_id(UserResource.toResource(user));
+
+		UserInfoModel uim = commentResource.getUser_id().getUserInfo();
+		uim.setUser(user);
+		commentResource.getUser_id().setUserInfoResource(uim);
 		commentRepository.save(commentResource.toModel());
 	}
 

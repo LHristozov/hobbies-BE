@@ -138,12 +138,23 @@ public class EventsResource {
 		eventsResource.setMeetingPoint(MeetingPointResource.toResource(eventsModel.getMeetingPoint()));
 
 		eventsResource.setOwner(UserResource.toResource(eventsModel.getOwner()));
+		eventsResource.getOwner().setUserInfoResource(null);
 
 		eventsResource.setDestination(DestinationResource.toResource(eventsModel.getEventDestination()));
 
 		if (eventsModel.getParticipants() != null) {
-			eventsResource.setParticipants(
-					eventsModel.getParticipants().stream().map(UserResource::toResource).collect(Collectors.toList()));
+			List<UserResource> participants = new ArrayList<UserResource>();
+			
+			for(User u : eventsModel.getParticipants()) {
+				UserResource us = UserResource.toResource(u);
+				us.setUserInfoResource(null);
+				participants.add(us);
+				
+			}
+			eventsResource.setParticipants(participants);
+			
+//			eventsResource.setParticipants(
+//					eventsModel.getParticipants().stream().map(UserResource::toResource).collect(Collectors.toList()));
 		}
 
 		return eventsResource;
