@@ -30,6 +30,8 @@ public class UserInfoModel {
 	private String livingLocation;
 	
 	private Date birthDate;
+	
+	private String gender;
 
 	public Long getId() {
 		return id;
@@ -77,6 +79,14 @@ public class UserInfoModel {
 
 	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 	
 	
