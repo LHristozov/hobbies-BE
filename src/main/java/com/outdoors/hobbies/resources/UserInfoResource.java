@@ -21,6 +21,8 @@ public class UserInfoResource {
 	private Date birthDate;
 	
 	private String gender;
+	
+	private String status;
 
 	public Long getId() {
 		return id;
@@ -78,6 +80,14 @@ public class UserInfoResource {
 		this.gender = gender;
 	}
 
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	public static UserInfoResource toResource(UserInfoModel userInfoModel) {
 		UserInfoResource userInfoResource = new UserInfoResource();
 		if (userInfoModel != null) {
@@ -87,6 +97,7 @@ public class UserInfoResource {
 			userInfoResource.setJob(userInfoModel.getJob());
 			userInfoResource.setLivingLocation(userInfoModel.getLivingLocation());
 			userInfoResource.setGender(userInfoModel.getGender());
+			userInfoResource.setStatus(userInfoModel.getStatus());
 			// userInfoResource.setUser(UserResource.toResource(userInfoModel.getUser()));
 		}
 		return userInfoResource;
@@ -102,6 +113,7 @@ public class UserInfoResource {
 		userInfoModel.setLivingLocation(livingLocation);
 		// userInfoModel.setUser(user.toModel());
 		userInfoModel.setGender(gender);
+		userInfoModel.setStatus(status);
 		return userInfoModel;
 	}
 }

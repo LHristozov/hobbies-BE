@@ -9,112 +9,111 @@ import java.util.List;
 @Table(name = "USER")
 public class User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @Column(name = "USERNAME", length = 50, unique = true)
-    @NotNull
-    @Size(min = 4, max = 50)
-    private String username;
+	@Column(name = "USERNAME", length = 50, unique = true)
+	@NotNull
+	@Size(min = 4, max = 50)
+	private String username;
 
-    @Column(name = "PASSWORD", length = 100)
-    @NotNull
-    @Size(min = 4, max = 100)
-    private String password;
+	@Column(name = "PASSWORD", length = 100)
+	@NotNull
+	@Size(min = 4, max = 100)
+	private String password;
 
-    @Column(name = "FIRSTNAME", length = 50)
-    @NotNull
-    @Size(min = 4, max = 50)
-    private String firstname;
+	@Column(name = "FIRSTNAME", length = 50)
+	@NotNull
+	@Size(min = 4, max = 50)
+	private String firstname;
 
-    @Column(name = "LASTNAME", length = 50)
-    @NotNull
-    @Size(min = 4, max = 50)
-    private String lastname;
+	@Column(name = "LASTNAME", length = 50)
+	@NotNull
+	@Size(min = 4, max = 50)
+	private String lastname;
 
-    @Column(name = "EMAIL", length = 50)
-    @NotNull
-    @Size(min = 4, max = 50)
-    private String email;
-    
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
-    private List<EventsModel> createdEvents;
-    
-    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
-    private List<CommentModel> comments;
-    
-    @ManyToMany(mappedBy = "participants")
-    private List<EventsModel> subscribedEvents;
-    
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL,  mappedBy = "user")
-   	private UserInfoModel userInfo;
+	@Column(name = "EMAIL", length = 50)
+	@NotNull
+	@Size(min = 4, max = 50)
+	private String email;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "USER_AUTHORITY",
-            joinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "ID")},
-            inverseJoinColumns = {@JoinColumn(name = "AUTHORITY_ID", referencedColumnName = "ID")})
-    private List<Authority> authorities;
-    
-    @Column(name = "IMAGE")
-    private String image;
-    
-    public Long getId() {
-        return id;
-    }
+	@OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+	private List<EventsModel> createdEvents;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	@OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
+	private List<CommentModel> comments;
 
-    public String getUsername() {
-        return username;
-    }
+	@ManyToMany(mappedBy = "participants")
+	private List<EventsModel> subscribedEvents;
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "user")
+	private UserInfoModel userInfo;
 
-    public String getPassword() {
-        return password;
-    }
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "USER_AUTHORITY", joinColumns = {
+			@JoinColumn(name = "USER_ID", referencedColumnName = "ID") }, inverseJoinColumns = {
+					@JoinColumn(name = "AUTHORITY_ID", referencedColumnName = "ID") })
+	private List<Authority> authorities;
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	@Column(name = "IMAGE")
+	private String image;
 
-    public String getFirstname() {
-        return firstname;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public String getLastname() {
-        return lastname;
-    }
+	public String getUsername() {
+		return username;
+	}
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public List<Authority> getAuthorities() {
-        return authorities;
-    }
+	public String getFirstname() {
+		return firstname;
+	}
 
-    public void setAuthorities(List<Authority> authorities) {
-        this.authorities = authorities;
-    }
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public List<Authority> getAuthorities() {
+		return authorities;
+	}
+
+	public void setAuthorities(List<Authority> authorities) {
+		this.authorities = authorities;
+	}
 
 	public List<EventsModel> getCreatedEvents() {
 		return createdEvents;
@@ -155,8 +154,5 @@ public class User {
 	public void setUserInfo(UserInfoModel userInfo) {
 		this.userInfo = userInfo;
 	}
-    
-	
-    
 
 }

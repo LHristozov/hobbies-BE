@@ -32,6 +32,8 @@ public class UserInfoModel {
 	private Date birthDate;
 	
 	private String gender;
+	
+	private String status;
 
 	public Long getId() {
 		return id;
@@ -87,6 +89,14 @@ public class UserInfoModel {
 
 	public void setGender(String gender) {
 		this.gender = gender;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	
 	

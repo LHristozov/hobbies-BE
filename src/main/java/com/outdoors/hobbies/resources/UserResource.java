@@ -161,7 +161,6 @@ public class UserResource {
 	public User toModel() {
 		User user = new User();
 		user.setEmail(email);
-		;
 		user.setFirstname(firstname);
 		user.setLastname(lastname);
 		user.setPassword(password);
