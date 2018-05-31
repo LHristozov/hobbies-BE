@@ -61,4 +61,15 @@ public class EventsController {
 		return eventsService.getEventParticipants(name);
 	}
 	
+	@RequestMapping(value = "/getEventsByUser/{name}", method = RequestMethod.GET)
+	public List<EventsResource> getEventsByUser(@PathVariable String name) {
+		
+		List<EventsResource> userEvents = new ArrayList<>();
+		eventsService.getEventsByUser(name).forEach(d -> {
+			userEvents.add(EventsResource.toResource(d));
+		});
+				
+		return userEvents;
+	}
+	
 }

@@ -79,8 +79,6 @@ public class EventsService {
 	}
 	
 	public ArrayList<String> getEventParticipants(String name) {
-		
-		
 		EventsModel event = eventsRepository.findByName(name);
 		List<User> participants =  event.getParticipants();
 		ArrayList<String> participantsNames = new ArrayList<String>();
@@ -88,6 +86,21 @@ public class EventsService {
 			participantsNames.add(participant.getUsername());
 		}
 		return participantsNames;
+
+	}
+	
+	public List<EventsModel> getEventsByUser(String name) {
+		List<EventsModel> allEvents = (List<EventsModel>) eventsRepository.findAll();
+		User user = userRepository.findByUsername(name);
+		List<EventsModel> userEvents = new ArrayList<EventsModel>();
+		
+		for(EventsModel em : allEvents) {
+			if(em.getParticipants().contains(user)) {
+				userEvents.add(em);
+			}
+		}
+		
+		return userEvents;
 
 	}
 
