@@ -103,6 +103,26 @@ public class EventsService {
 		return userEvents;
 
 	}
+	
+	
+	public EventsResource getNextEventByUser(String name) {
+		List<EventsModel> events =  getEventsByUser(name);
+		EventsModel currentEvent = null;
+		
+		for(EventsModel event : events) {
+			if(currentEvent == null) {
+				currentEvent = event;
+				continue;
+			}
+			if(event.getEventDate().compareTo(currentEvent.getEventDate()) < 0) {
+				currentEvent = event;
+			}
+		
+		}
+		
+		return EventsResource.toResource(currentEvent);
+		
+	}
 
 	public EventsModel getEventById(Long id) {
 		return eventsRepository.findOne(id);

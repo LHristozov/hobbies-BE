@@ -129,7 +129,7 @@ public class UserResource {
 		userResource.setUsername(userModel.getUsername());
 		userResource.setEmail(userModel.getEmail());
 		userResource.setFirstname(userModel.getFirstname());
-		userResource.setLastname(userModel.getPassword());
+		userResource.setLastname(userModel.getLastname());
 		userResource.setId(userModel.getId());
 		userResource.setImage(userModel.getImage());
 		userResource.setPassword(userModel.getPassword());

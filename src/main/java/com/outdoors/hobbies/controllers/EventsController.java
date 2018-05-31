@@ -72,4 +72,9 @@ public class EventsController {
 		return userEvents;
 	}
 	
+	@RequestMapping(value = "/getNextEventByUser/{name}", method = RequestMethod.GET)
+	public EventsResource getNextEventByUser(@PathVariable String name) {
+		return eventsService.getNextEventByUser(name);
+	}
+	
 }
