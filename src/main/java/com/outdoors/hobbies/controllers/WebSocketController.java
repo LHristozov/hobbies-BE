@@ -20,7 +20,7 @@ public class WebSocketController {
     // TODO: add username to the message (can get it as pathVariable?)
     @MessageMapping("/send/message")
     public void onReceivedMesage(String message){
-        this.template.convertAndSend("/chat",  new SimpleDateFormat("HH:mm:ss").format(new Date())+"- "+message);
+        this.template.convertAndSend("/chat", "[" + new SimpleDateFormat("HH:mm:ss").format(new Date())+"]" + ":"+message);
     }
 
 }
