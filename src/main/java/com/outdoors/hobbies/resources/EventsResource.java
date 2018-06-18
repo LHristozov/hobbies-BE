@@ -26,7 +26,7 @@ public class EventsResource {
 
 	private List<CommentResource> comment;
 
-	private List<CategoryResource> categories;
+	private CategoryResource category;
 
 	private List<UserResource> participants;
 
@@ -96,12 +96,12 @@ public class EventsResource {
 		this.participants = participants;
 	}
 
-	public List<CategoryResource> getCategories() {
-		return categories;
+	public CategoryResource getCategory() {
+		return category;
 	}
 
-	public void setCategories(List<CategoryResource> categories) {
-		this.categories = categories;
+	public void setCategory(CategoryResource category) {
+		this.category = category;
 	}
 
 	public DestinationResource getDestination() {
@@ -123,9 +123,8 @@ public class EventsResource {
 		// eventsModel.getComments().stream().map(CommentResource::toResource).collect(Collectors.toList()));
 		// }
 
-		if (eventsModel.getCategories() != null) {
-			eventsResource.setCategories(eventsModel.getCategories().stream().map(CategoryResource::toResource)
-					.collect(Collectors.toList()));
+		if (eventsModel.getCategory() != null) {
+			eventsResource.setCategory(CategoryResource.toResource(eventsModel.getCategory()));
 		}
 
 		if (eventsModel.getEventDate() == null || eventsModel.getEventDate().toString().equals("0000-00-00 00:00:00")) {

@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -26,9 +27,9 @@ public class CategoryModel {
 	
 	@NotNull
 	private String description;
-	
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "categories")
-	private List<EventsModel> events;
+		
+    @OneToMany(mappedBy = "category")
+    private List<EventsModel> event;
 
 	public Long getId() {
 		return id;
@@ -54,15 +55,14 @@ public class CategoryModel {
 		this.description = description;
 	}
 
-	public List<EventsModel> getEvents() {
-		return events;
+	public List<EventsModel> getEvent() {
+		return event;
 	}
 
-	public void setEvents(List<EventsModel> events) {
-		this.events = events;
+	public void setEvent(List<EventsModel> event) {
+		this.event = event;
 	}
 
-	
 	
 	
 

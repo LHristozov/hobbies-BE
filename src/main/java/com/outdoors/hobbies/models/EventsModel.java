@@ -49,12 +49,10 @@ public class EventsModel {
     @JoinColumn(name = "destination_id")
     private DestinationModel eventDestination;
     
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "CATEGORY_EVENT", 
-    	joinColumns = @JoinColumn(name = "EVENT_ID", referencedColumnName = "ID"), 
-    	inverseJoinColumns = @JoinColumn(name = "CATEGORY_ID", referencedColumnName = "ID"))
-    private List<CategoryModel> categories;
-	
+    @ManyToOne()
+    @JoinColumn(name = "category_id")
+    private CategoryModel category;
+    	
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "USER_EVENT", 
     	joinColumns = @JoinColumn(name = "EVENT_ID", referencedColumnName = "ID"), 
@@ -125,12 +123,12 @@ public class EventsModel {
 		this.comments = comments;
 	}
 
-	public List<CategoryModel> getCategories() {
-		return categories;
+	public CategoryModel getCategory() {
+		return category;
 	}
 
-	public void setCategories(List<CategoryModel> categories) {
-		this.categories = categories;
+	public void setCategory(CategoryModel category) {
+		this.category = category;
 	}
 
 	public DestinationModel getEventDestination() {
