@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.outdoors.hobbies.models.User;
 import com.outdoors.hobbies.repositories.UserRepository;
+import com.outdoors.hobbies.resources.UserInfoResource;
 import com.outdoors.hobbies.resources.UserResource;
 
 @Service
@@ -22,6 +23,16 @@ public class UserService {
 	}
 
 	public void saveUser(UserResource userResource) {
+		if (userResource == null) {
+			return;
+		}
+		if (userResource.getUserInfo() != null && userResource.getUserInfo().getUser() == null) {
+			userResource.getUserInfo().setUser((userRepository.findOne(userResource.getId())));
+		}
+		userRepository.save(userResource.toModel());
+	}
+	
+	public void UpdateStatus(UserResource userResource) {
 		if (userResource == null) {
 			return;
 		}

@@ -1,35 +1,21 @@
-User information: --------------------------------> GOTOVO
-- trqbva da se dobavi tablica user_info, koqto sadurja informaciq za potrebitelq ( interesi, rabota, data na rajdane, mestojitelstvo)--------> GOTOVO
-
-Edit Personal Info
-- CSS 
-
 User Status:
-- add/show user status(string writen by user)
-
-Home:
-- CSS
+- add/show user status(string writen by user) ---> gotovo
+- CSS for Status
 
 Event page:
-- CSS
-
-Destinations:
-- CSS
-
-Destination Page:
-- CSS
- 
-Chat
-- CSS
-- da se pokazva koi e v 4ata
+- UPDATE/DELETE BUTTON
 
 Messages:
 - CSS
 - Polucheni MSG
 
-Edit Personal Info
-- CSS 
 
 Recommender System
+- logic for the system
+- add to Events page 
+
+
+Upcoming Events:
+- get the right event (check what happens if the user has no upcomming events)
 
 

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.outdoors.hobbies.resources.UserInfoResource;
 import com.outdoors.hobbies.resources.UserResource;
 import com.outdoors.hobbies.services.UserService;
 
@@ -42,6 +43,11 @@ public class UserController {
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
 	public void updateUser(@PathVariable Long id, @RequestBody UserResource user) {
 		userService.saveUser(user);
+	}
+	
+	@RequestMapping(value = "/updateStatus/{username}", method = RequestMethod.POST)
+	public void updateStatus(@PathVariable String username, @RequestBody UserResource user) {
+		userService.UpdateStatus(user);
 	}
 
 }
