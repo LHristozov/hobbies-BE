@@ -50,5 +50,9 @@ public class UserService {
 		
 		return userRepository.findByUsername(username);
 	}
+	
+	public String getUserNameById(Long id) {
+		return userRepository.findOne(id).getUsername();
+	}
 
 }

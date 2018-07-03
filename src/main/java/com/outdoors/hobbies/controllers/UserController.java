@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,10 +46,17 @@ public class UserController {
 	public void updateUser(@PathVariable Long id, @RequestBody UserResource user) {
 		userService.saveUser(user);
 	}
-	
+
 	@RequestMapping(value = "/updateStatus/{username}", method = RequestMethod.POST)
 	public void updateStatus(@PathVariable String username, @RequestBody UserResource user) {
 		userService.UpdateStatus(user);
 	}
+
+	@RequestMapping(value = "/getUserNameById/{id}", method = RequestMethod.GET)
+	public ResponseEntity<String> getUserNameById(@PathVariable Long id) {
+		return new ResponseEntity<String>("{\"name\":\"" + userService.getUserNameById(id) +"\"}", HttpStatus.OK);
+	}
+	
+
 
 }

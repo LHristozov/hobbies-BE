@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.outdoors.hobbies.resources.DestinationResource;
 import com.outdoors.hobbies.resources.MessagesResource;
+import com.outdoors.hobbies.resources.UserResource;
 import com.outdoors.hobbies.services.MessagesService;
 
 @RestController
@@ -27,16 +28,22 @@ public class MessagesController {
 	}
 	
 	
-	@RequestMapping(value = "/{receiverId}", method = RequestMethod.GET)
-	public List<MessagesResource> getMessagesResourceByreceiver(@PathVariable Long receiverId) {
+	@RequestMapping(value = "getMessages/{senderId}", method = RequestMethod.GET)
+	public List<MessagesResource> getMessagesResourceByreceiver(@PathVariable String senderId) {
 		
 		List<MessagesResource> messages = new ArrayList<>();
-		messagesService.getMessageByReceiver(receiverId).forEach(d -> {
+		messagesService.getMessageBySender(senderId).forEach(d -> {
 			messages.add(MessagesResource.toResource(d));
 		});
 		
 		return messages;
 	}
+	
+	@RequestMapping(value = "/updateMessage", method = RequestMethod.POST)
+	public void updateStatus(@RequestBody Long id) {
+		messagesService.updateMessage(id);
+	}
+
 	
 
 }
