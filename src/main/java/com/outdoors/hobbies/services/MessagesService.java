@@ -22,6 +22,9 @@ public class MessagesService {
 	}
 	
 	public void saveMessage(MessagesResource msg) {
+		if(msg == null) {
+			return;
+		}
 		msg.setDate(new Date());
 		messagesRepository.save(msg.toModel());
 	}

@@ -2,12 +2,14 @@ package com.outdoors.hobbies.resources;
 
 
 import com.outdoors.hobbies.models.CategoryModel;
+import com.outdoors.hobbies.models.MeetingPointModel;
 
 public class CategoryResource {
 	
 	private Long id;
 	private String name;
 	private String description;
+	
 	public Long getId() {
 		return id;
 	}
@@ -34,6 +36,18 @@ public class CategoryResource {
 		categoryResource.setId(categoryModel.getId());
 		
 		return categoryResource;
+	}
+	
+	public CategoryModel toModel() {
+		CategoryModel categoryModel = new CategoryModel();
+		categoryModel.setDescription(description);
+		categoryModel.setName(name);
+		categoryModel.setId(id);
+		
+		
+		//TODO: add all fields
+		
+		return categoryModel;
 	}
 	
 	

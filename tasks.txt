@@ -5,10 +5,6 @@ User Status:
 Event page:
 - UPDATE/DELETE BUTTON
 
-Messages:
-- CSS
-- Polucheni MSG
-
 
 Recommender System
 - logic for the system

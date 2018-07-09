@@ -179,6 +179,7 @@ public class EventsResource {
 			eventsModel.setParticipants(userList);	
 				
 		}
+		eventsModel.setCategory(category.toModel());
 		// TODO: add all fields
 
 		return eventsModel;

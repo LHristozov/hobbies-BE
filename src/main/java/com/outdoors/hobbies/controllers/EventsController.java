@@ -41,6 +41,11 @@ public class EventsController {
 		return EventsResource.toResource(eventsService.getEventByName(name));
 	}
 	
+	@RequestMapping(value = "getRecommended/{username}", method = RequestMethod.GET)
+	public EventsResource getRecommendedEvent(@PathVariable String username) {
+		return EventsResource.toResource(eventsService.getRecommendedEvent(username));
+	}
+	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public EventsResource getEventById(@PathVariable String id) {
 		return EventsResource.toResource(eventsService.getEventById(Long.getLong(id)));
@@ -54,6 +59,11 @@ public class EventsController {
 	@RequestMapping(value = "/registerForEvent", method = RequestMethod.POST)
 	public void registerForEvent(@RequestBody EventsResource event) {
 		eventsService.registerForEvent(event);
+	}
+	
+	@RequestMapping(value = "/deleteEvent", method = RequestMethod.POST)
+	public void deleteEvent(@RequestBody EventsResource event) {
+		eventsService.deleteEvent(event);
 	}
 	
 	@RequestMapping(value = "/getEventParticipants/{name}", method = RequestMethod.GET)

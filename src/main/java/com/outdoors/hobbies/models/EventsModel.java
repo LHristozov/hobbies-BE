@@ -46,7 +46,7 @@ public class EventsModel {
     @JoinColumn(name = "user_id")
 	private User owner;
 	
-    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "event")
     private List<CommentModel> comments;
     
     @ManyToOne()
@@ -57,7 +57,7 @@ public class EventsModel {
     @JoinColumn(name = "category_id")
     private CategoryModel category;
     	
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany()
     @JoinTable(name = "USER_EVENT", 
     	joinColumns = @JoinColumn(name = "EVENT_ID", referencedColumnName = "ID"), 
     	inverseJoinColumns = @JoinColumn(name = "USER_ID", referencedColumnName = "ID"))
