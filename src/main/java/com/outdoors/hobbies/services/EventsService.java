@@ -1,11 +1,13 @@
 package com.outdoors.hobbies.services;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -138,9 +140,14 @@ public class EventsService {
 
 	public EventsModel getRecommendedEvent(String username) {
 		List<EventsModel> allEvents = (List<EventsModel>) eventsRepository.findAll();
-		List<EventsModel> newEvents = null;
+		EventsModel recommendedEvent = null;
 		User user = userRepository.findByUsername(username);
-		String [] userIntr = user.getUserInfo().getInterests().replaceAll(" ", "").split(",");
+		String [] userIntr = {};
+		if(user.getUserInfo().getInterests() != null) {
+			userIntr = user.getUserInfo().getInterests().replaceAll(" ", "").split(",");
+		}
+		int max = 0;
+		EventsModel mostPopularEvent = new EventsModel();
 		
 		Map<String, Integer> hm = new HashMap<String, Integer>();
 		
@@ -162,16 +169,58 @@ public class EventsService {
 				}
 			}
 			
+			if(event.getDescription() != null) {
+				String eventDescription = event.getDescription();
+				for(String str : userIntr) {
+					if(eventDescription.contains(str)) {
+						if(hm.get(event.getName()) == null) {
+							hm.put(event.getName(), 1);
+							continue;
+						}
+						hm.put(event.getName(), hm.get(event.getName()) + 1);
+					}
+				}
+				
+			}
 			
 			
-			
+			if(event.getParticipants() != null && event.getParticipants().size() >= max) {
+				mostPopularEvent = event;
+				max = event.getParticipants().size();
+			}
 		
 		}
 		
+		String mostPopular = "";	
+		
+//		final EventsModel eventt = mostPopularEvent;
+//		mostPopular = hm.keySet().stream().filter(key -> key.equals(eventt.getName())).findFirst().get();
 	
+		for(String key : hm.keySet()) {
+			if(key.equals(mostPopularEvent.getName())) {
+				mostPopular = key;
+				break;
+			}
+		}
+		if(mostPopular.equals("")) {
+			mostPopular = mostPopularEvent.getName();
+		}
 		
+		if(hm.get(mostPopularEvent.getName()) == null) {
+			hm.put(mostPopularEvent.getName(), 1);
+		}else {
+			hm.put(mostPopular, hm.get(mostPopularEvent.getName()) + 1);
+		}
+//		int maxValue = Collections.max(hm.values());
+		String recommendedEventName = Collections.max(hm.entrySet(), (l,r) -> l.getValue() - r.getValue()).getKey();
 		
-		return new EventsModel();
+		for(EventsModel e : allEvents) {
+			if(e.getName().equals(recommendedEventName)) {
+				recommendedEvent = e;
+			}
+		}
+		
+		return recommendedEvent;
 	}
 
 	public void deleteEventBy(Long id) {
